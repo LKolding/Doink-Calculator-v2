@@ -2,6 +2,8 @@ from datetime import datetime
 import json
 import os
 
+from calculatorFunctions import calculate
+
 READ_MODE = "r"
 WRITE_MODE = "w"
 
@@ -67,13 +69,27 @@ class Handler:
         with open("db.json", READ_MODE) as f:
             ## READ FILE
             obj = json.loads(f.read())
+
+            ## CHECK IF PERSON EXISTS
+            people = []
+            for guy in obj: people.append(guy)
+            if person not in people: raise Exception(f"No person in database called {person}")
+
             if len(obj[person]) == 0: raise Exception(f"{person} has no doinks saved")
+
+            total_smokes = 0.0
+            total_weed = 0.0          
 
             print(SEPARATOR)
             for sesh in obj[person]:
                 print(f"\
 {sesh['date']} {sesh['time']} /-/ \
 Smokes: {sesh['smokes']} Weed: {sesh['weed']}")
+                total_smokes += sesh['smokes']
+                total_weed += sesh['weed']
+
+            print(SEPARATOR)
+            print(f"Total value: {calculate(total_smokes, total_weed)}")
             print(SEPARATOR)
 
     def clearDoinks(self, person):
