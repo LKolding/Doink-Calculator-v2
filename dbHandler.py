@@ -89,7 +89,7 @@ Smokes: {sesh['smokes']} Weed: {sesh['weed']}")
                 total_weed += sesh['weed']
 
             print(SEPARATOR)
-            print(f"Total value: {calculate(total_smokes, total_weed)}")
+            print(f"Total value: {calculate(total_smokes, total_weed)} kr.")
             print(SEPARATOR)
 
     def clearDoinks(self, person):
@@ -177,6 +177,5 @@ Smokes: {sesh['smokes']} Weed: {sesh['weed']}")
                 f.write(newobj)
             except Exception as e: print(f"Couldn't save file\n{e}")
         print(f"{person} has been added!")
-
 
 if __name__=="__main__": exit()
